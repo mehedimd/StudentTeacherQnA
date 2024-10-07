@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\STQnA.Core\STQnA.Core.csproj" />
     <ProjectReference Include="..\STQnA.Service\STQnA.Service.csproj" />
   </ItemGroup>
 

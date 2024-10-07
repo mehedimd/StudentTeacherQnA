@@ -10,4 +10,8 @@
     <Folder Include="ServiceExtension\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\STQnA.Core\STQnA.Core.csproj" />
+  </ItemGroup>
+
 </Project>
