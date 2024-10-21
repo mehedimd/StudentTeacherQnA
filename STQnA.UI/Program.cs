@@ -1,4 +1,28 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using STQnA.Core.Models;
+using STQnA.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure DbContext with SQL Server
+builder.Services.AddDbContext<STQnAContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Configure Identity
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option =>
+{
+    option.Password.RequiredLength = 4;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireLowercase = false;
+    option.Password.RequireDigit = false;
+    option.Password.RequireNonAlphanumeric = false;
+    option.User.RequireUniqueEmail = true;
+
+})
+    .AddEntityFrameworkStores<STQnAContext>()
+    .AddDefaultTokenProviders();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

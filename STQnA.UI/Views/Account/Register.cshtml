@@ -1,0 +1,83 @@
+﻿@model STQnA.Core.ViewModels.RegisterVM;
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form asp-action="Register" method="post" id="registrationForm">
+            <fieldset class="border p-3">
+                <legend class="text-center">Registration Form</legend>
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label"></label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Role" class="form-label">Role</label>
+                    <select asp-for="Role" class="form-control" id="userRole">
+                        <option value="">--Select Role--</option>
+                        <option value="Student">Student</option>
+                        <option value="Teacher">Teacher</option>
+                    </select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+
+                <div id="studentFields" style="display: none;">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="InstituteName" class="form-label"></label>
+                        <input asp-for="InstituteName" class="form-control" />
+                        <span asp-validation-for="InstituteName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="InstituteIDCardNumber" class="form-label"></label>
+                        <input asp-for="InstituteIDCardNumber" class="form-control" />
+                        <span asp-validation-for="InstituteIDCardNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    @* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> *@
+    <script>
+        $(document).ready(function () {
+            $('#userRole').change(function () {
+                if ($(this).val() == 'Student') {
+                    $('#studentFields').show();
+                } else {
+                    $('#studentFields').hide();
+                }
+            });
+
+            // Initially hide student fields
+            $('#studentFields').hide();
+        });
+    </script>
+}
