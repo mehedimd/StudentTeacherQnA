@@ -1,14 +1,19 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using STQnA.Core.Common;
 using STQnA.Core.Models;
 using STQnA.Infrastructure;
+using STQnA.Infrastructure.ServiceExtension;
+using STQnA.Service.Interfaces;
+using STQnA.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure DbContext with SQL Server
-builder.Services.AddDbContext<STQnAContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Configure DbContext and register repository by Extension method AddDIService
+builder.Services.AddDIServices(builder.Configuration);
+
+// register service
+builder.Services.AddScoped<IQuestionService, QuestionService>();
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option =>
@@ -23,6 +28,15 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option =>
 })
     .AddEntityFrameworkStores<STQnAContext>()
     .AddDefaultTokenProviders();
+
+// auto mapper
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new AppAutoMapperProfile());
+});
+var mapper = mappingConfig.CreateMapper();
+
+builder.Services.AddSingleton(mapper);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using STQnA.Core.Interfaces.Generic;
+using STQnA.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace STQnA.Core.Interfaces
 {
-    public interface IAnswerRepository
+    public interface IAnswerRepository : IGenericRepository<Answer>
     {
     }
 }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using STQnA.Core.Interfaces;
+using STQnA.Core.Models;
+using STQnA.Infrastructure.Repositories.Generic;
 
 namespace STQnA.Infrastructure.Repositories
 {
-    public class QuestionRepository
+    public class QuestionRepository : GenericRepository<Question>, IQuestionRepository
     {
+        public QuestionRepository(STQnAContext context) : base(context)
+        {
+
+        }
     }
 }

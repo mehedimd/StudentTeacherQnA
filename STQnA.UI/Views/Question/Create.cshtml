@@ -1,0 +1,65 @@
+﻿@model STQnA.Core.Models.Question;
+
+@{
+    ViewData["Title"] = "Create Question";
+}
+
+@* <div>
+    <form asp-action="Create" method="post">
+        <input type="hidden" asp-for="StudentId" value="@User?.Identity?.Name" />
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="control-label">Ask a Question ?</label>
+                            <textarea asp-for="QuestionText" class="form-control" rows="2"></textarea>
+                            <span asp-validation-for="QuestionText" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <input type="submit" value="Post Question" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> *@
+
+<div class="row">
+    <div class="col-md-6 offset-md-3 default-according">
+        <div class="card p-3">
+            <div class="card-header pb-4">
+                <h5>New Question</h5>
+            </div>
+            <div class="setting-list">
+            </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post">
+                    <div class="row">
+                        <div class="col-md-12 shadow px-3 py-4">
+                            <div class="form-group">
+                                <label class="control-label">Ask a Question ?</label>
+                                <textarea asp-for="QuestionText" class="form-control" rows="2"></textarea>
+                                <span asp-validation-for="QuestionText" class="text-danger"></span>
+                            </div>
+                            <div class="mt-2 text-end">
+                                <input type="submit" value="Post Question" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="mt-2">
+                    <a asp-action="Index" asp-controller="Question" class="btn btn-primary">Back To List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @*  @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} *@
+}
+
