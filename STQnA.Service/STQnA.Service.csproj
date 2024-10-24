@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\STQnA.Core\STQnA.Core.csproj" />
+    <ProjectReference Include="..\STQnA.Infrastructure\STQnA.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

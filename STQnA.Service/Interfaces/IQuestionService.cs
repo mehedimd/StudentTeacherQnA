@@ -12,8 +12,9 @@ namespace STQnA.Service.Interfaces
     {
         Task<IEnumerable<Question>> GetAllQuestionsAsync();
         Task<Question> GetQuestionByIdAsync(int id);
+        Task<Question> GetQuestionByIdWithAnswerAsync(int id);
         Task<bool> AddQuestionAsync(QuestionVM model);
-        Task<bool> UpdateQuestionAsync(Question model);
+        Task<bool> UpdateQuestionAsync(QuestionVM model);
         Task<bool> DeleteQuestionAsync(int id);
     }
 }

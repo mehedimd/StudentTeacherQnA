@@ -1,0 +1,72 @@
+﻿@model STQnA.Core.Models.Question;
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow border-0">
+                <div class="card-header bg-gradient text-white text-center rounded-top">
+                    <h5 class="mb-0">Question Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h4 class="fw-bold">Question:</h4>
+                        <p class="fs-5 text-muted">@Model.QuestionText</p>
+                        <div class="text-muted mb-2">
+                            <small>Asked by <strong>@Model.Student.UserName</strong> on <em>@Model.CreatedDate.ToString("MMMM dd, yyyy")</em></small>
+                        </div>
+                    </div>
+                    <hr>
+                    <h4 class="fw-bold">Answers:</h4>
+                    <div class="mb-3">
+                        @if (Model.Answers.Any())
+                        {
+                            foreach (var answer in Model.Answers)
+                            {
+                                <div class="card border-light mb-3 shadow-sm">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold">Answer by <strong>@answer.Teacher.Email</strong></h6>
+                                        <p>@answer.AnswerText</p>
+                                        <div class="text-muted">
+                                            <small>Posted on <em>@answer.CreatedDate.ToString("MMMM dd, yyyy")</em></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-muted">No answers yet.</p>
+                        }
+                    </div>
+                    <hr>
+                    <h4 class="fw-bold">Post a New Answer</h4>
+                    @if (User.IsInRole("Teacher"))
+                    {
+                        <form asp-action="PostAnswer" method="post">
+                            <div class="form-group mb-3">
+                                <label for="AnswerText" class="form-label">Your Answer</label>
+                                <textarea id="AnswerText" name="AnswerText" class="form-control" rows="4" placeholder="Write your answer here..."></textarea>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">Submit Answer</button>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <p class="text-muted">Only teachers can answer questions.</p>
+                        <div class="d-flex justify-content-end">
+                            <a href="@Url.Action("Login", "Account")" class="btn btn-danger">Login as a Teacher?</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-gradient {
+        background: linear-gradient(90deg, rgba(0,123,255,1) 0%, rgba(0,201,255,1) 100%);
+    }
+</style>

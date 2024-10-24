@@ -9,6 +9,9 @@ namespace STQnA.Core.Common
         public AppAutoMapperProfile()
         {
             CreateMap<QuestionVM, Question>();
+            CreateMap<Question, QuestionVM>();
+            CreateMap<Answer,AnswerVM>();
+            CreateMap<AnswerVM, Answer>();
         }
     }
 }

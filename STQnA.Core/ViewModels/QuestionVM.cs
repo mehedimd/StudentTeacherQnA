@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using STQnA.Core.Models;
 
 namespace STQnA.Core.ViewModels
 {
@@ -10,7 +6,10 @@ namespace STQnA.Core.ViewModels
     {
         public int QuestionId { get; set; }
         public string QuestionText { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public bool? IsAnswered { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public bool IsAnswered { get; set; } = false;
+        public string? StudentId { get; set; }
+        public ApplicationUser? Student { get; set; }
+        public ICollection<Answer>? Answers { get; set; }
     }
 }

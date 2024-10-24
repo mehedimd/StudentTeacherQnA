@@ -14,6 +14,7 @@ builder.Services.AddDIServices(builder.Configuration);
 
 // register service
 builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option =>
@@ -37,6 +38,9 @@ var mappingConfig = new MapperConfiguration(mc =>
 var mapper = mappingConfig.CreateMapper();
 
 builder.Services.AddSingleton(mapper);
+
+// for get current user credential
+builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

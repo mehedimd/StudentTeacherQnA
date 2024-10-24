@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using STQnA.Core.Models;
 using STQnA.Core.ViewModels;
@@ -10,6 +11,7 @@ public class QuestionController : Controller
 {
     #region Config
     private readonly IQuestionService _questionService; // Assuming a service layer for handling logic
+    private readonly IMapper _iMapper;
 
     public QuestionController(IQuestionService questionService)
     {
@@ -30,7 +32,7 @@ public class QuestionController : Controller
     // GET: Question details
     public async Task<IActionResult> Details(int id)
     {
-        var question = await _questionService.GetQuestionByIdAsync(id);
+        var question = await _questionService.GetQuestionByIdWithAnswerAsync(id);
         if (question == null)
         {
             return NotFound();
@@ -73,34 +75,40 @@ public class QuestionController : Controller
         {
             return NotFound(); // Prevent editing questions that already have answers
         }
+        QuestionVM model = new QuestionVM()
+        {
+            QuestionId = question.QuestionId,
+            StudentId = question.StudentId,
+            QuestionText = question.QuestionText,
+            CreatedDate = question.CreatedDate
+        };
 
-        return View(question);
+        return View(model);
     }
 
     // POST: Save changes to the question
     [HttpPost]
     [ValidateAntiForgeryToken]
     [Authorize(Roles = "Student")] // Only students can submit edits
-    public async Task<IActionResult> Edit(int id, Question model)
+    public async Task<IActionResult> Edit(int id, QuestionVM vm)
     {
-        if (id != model.QuestionId)
+        if (id != vm.QuestionId)
         {
             return BadRequest();
         }
 
         if (ModelState.IsValid)
         {
-            _questionService.UpdateQuestionAsync(model);
+            _questionService.UpdateQuestionAsync(vm);
             return RedirectToAction(nameof(Index));
         }
-        return View(model);
+        return View(vm);
     }
     #endregion
 
     #region Delete
     // POST: Delete a question (only if there is no answer yet)
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
+    [ActionName("Delete")]
     [Authorize(Roles = "Student")] // Only students can delete their own questions
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
@@ -111,7 +119,7 @@ public class QuestionController : Controller
         }
 
         _questionService.DeleteQuestionAsync(id);
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index");
     }
     #endregion
 }

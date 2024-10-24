@@ -10,5 +10,7 @@ namespace STQnA.Core.Interfaces
 {
     public interface IQuestionRepository : IGenericRepository<Question>
     {
+        Task<IEnumerable<Question>> GetAllQuestion();
+        Task<Question> GetQuestionByIdWithAnswer(int id);
     }
 }

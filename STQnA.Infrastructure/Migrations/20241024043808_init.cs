@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace STQnA.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -172,7 +172,7 @@ namespace STQnA.Infrastructure.Migrations
                     QuestionText = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsAnswered = table.Column<bool>(type: "bit", nullable: false),
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -218,8 +218,8 @@ namespace STQnA.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "10e6ede6-3153-4e11-b7d5-c75efaf97153", null, "Teacher", "TEACHER" },
-                    { "61412797-78a1-45e0-b3de-0979609cbd7b", null, "Student", "STUDENT" }
+                    { "4b80ac37-4196-48e7-b68a-fbd8a0c132cd", null, "Teacher", "TEACHER" },
+                    { "adbca11b-b6f1-4506-9078-08bd6ce48299", null, "Student", "STUDENT" }
                 });
 
             migrationBuilder.CreateIndex(

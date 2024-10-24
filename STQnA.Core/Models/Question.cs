@@ -10,14 +10,14 @@ namespace STQnA.Core.Models
     {
         public int QuestionId { get; set; }
         public string QuestionText { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public bool IsAnswered { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public bool IsAnswered { get; set; } = false;
 
         // Foreign Key to the Student who asked the question (ApplicationUser)
         public string StudentId { get; set; } // This will hold IdentityUser Id (string)
 
         // Navigation Properties
         public ApplicationUser Student { get; set; }
-        public ICollection<Answer> Answers { get; set; }
+        public ICollection<Answer> Answers { get; set; } = new List<Answer>();
     }
 }

@@ -51,13 +51,13 @@ namespace STQnA.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "61412797-78a1-45e0-b3de-0979609cbd7b",
+                            Id = "adbca11b-b6f1-4506-9078-08bd6ce48299",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "10e6ede6-3153-4e11-b7d5-c75efaf97153",
+                            Id = "4b80ac37-4196-48e7-b68a-fbd8a0c132cd",
                             Name = "Teacher",
                             NormalizedName = "TEACHER"
                         });
@@ -299,7 +299,6 @@ namespace STQnA.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("QuestionId");
@@ -384,8 +383,7 @@ namespace STQnA.Infrastructure.Migrations
                     b.HasOne("STQnA.Core.Models.ApplicationUser", "Student")
                         .WithMany("Questions")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Student");
                 });
