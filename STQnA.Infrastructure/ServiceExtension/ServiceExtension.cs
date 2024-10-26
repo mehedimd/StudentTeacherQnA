@@ -21,6 +21,7 @@ public static class ServiceExtension
         });
 
         services.AddScoped<IQuestionRepository, QuestionRepository>(); 
+        services.AddScoped<IAnswerRepository, AnswerRepository>();
 
         return services;
     }

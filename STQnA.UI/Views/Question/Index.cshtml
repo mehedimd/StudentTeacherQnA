@@ -1,5 +1,8 @@
-﻿@model IEnumerable<STQnA.Core.Models.Question>
-
+﻿@using System.Security.Claims;
+@model IEnumerable<STQnA.Core.Models.Question>
+@{
+    string currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value??"";
+}
 <div class="container mt-4">
     <div class="row">
         <div class="col-12">
@@ -20,6 +23,11 @@
                     {
                         <div class="col-md-6 mb-4">
                             <div class="card shadow-sm h-100">
+                                <!-- "Your Question" Badge -->
+                                @if (question.StudentId == currentUserId)
+                                {
+                                    <span class="badge bg-primary position-absolute top-0 end-0 m-2">Your Question</span>
+                                }
                                 <div class="card-body">
                                     <h5 class="card-title text-primary">@question.QuestionText</h5>
                                     <p class="card-text">
@@ -41,7 +49,7 @@
                                     <a asp-action="Details" asp-route-id="@question.QuestionId" class="btn btn-outline-primary btn-sm">
                                         View Details
                                     </a>
-                                    @if (User.IsInRole("Student"))
+                                    @if (User.IsInRole("Student") && !(question.IsAnswered) && (question.StudentId == currentUserId))
                                     {
                                         <a asp-action="Edit" asp-route-id="@question.QuestionId" class="btn btn-outline-secondary btn-sm">
                                             Edit

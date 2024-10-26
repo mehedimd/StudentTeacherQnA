@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card shadow border-0">
-                <div class="card-header bg-gradient text-white text-center rounded-top">
+                <div class="card-header bg-gradient text-primary text-center rounded-top">
                     <h5 class="mb-0">Question Details</h5>
                 </div>
                 <div class="card-body">
@@ -42,7 +42,8 @@
                     <h4 class="fw-bold">Post a New Answer</h4>
                     @if (User.IsInRole("Teacher"))
                     {
-                        <form asp-action="PostAnswer" method="post">
+                        <form asp-action="PostAnswer" asp-controller="Answer" method="post">
+                            <input asp-for="QuestionId" type="hidden" />
                             <div class="form-group mb-3">
                                 <label for="AnswerText" class="form-label">Your Answer</label>
                                 <textarea id="AnswerText" name="AnswerText" class="form-control" rows="4" placeholder="Write your answer here..."></textarea>
@@ -56,9 +57,12 @@
                     {
                         <p class="text-muted">Only teachers can answer questions.</p>
                         <div class="d-flex justify-content-end">
-                            <a href="@Url.Action("Login", "Account")" class="btn btn-danger">Login as a Teacher?</a>
+                            <a href="@Url.Action("Login", "Account")" class="btn btn-outline-secondary">Login as a Teacher?</a>
                         </div>
                     }
+                    <div class="mt-3">
+                        <a asp-action="Index" asp-controller="Question" class="btn btn-outline-secondary btn-md">Back to List</a>
+                    </div>
                 </div>
             </div>
         </div>

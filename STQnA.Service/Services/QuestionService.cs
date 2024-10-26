@@ -97,7 +97,7 @@ namespace STQnA.Service.Services
                 {
                     questionFind.QuestionId = vm.QuestionId;
                     questionFind.QuestionText = vm.QuestionText;
-                    questionFind.StudentId = vm.StudentId;
+                    questionFind.StudentId = vm.StudentId??"";
                     questionFind.CreatedDate = vm.CreatedDate;
 
                     _repo.Update(questionFind);

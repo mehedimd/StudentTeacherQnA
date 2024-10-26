@@ -11,7 +11,6 @@ public class QuestionController : Controller
 {
     #region Config
     private readonly IQuestionService _questionService; // Assuming a service layer for handling logic
-    private readonly IMapper _iMapper;
 
     public QuestionController(IQuestionService questionService)
     {
@@ -99,7 +98,7 @@ public class QuestionController : Controller
 
         if (ModelState.IsValid)
         {
-            _questionService.UpdateQuestionAsync(vm);
+            await _questionService.UpdateQuestionAsync(vm);
             return RedirectToAction(nameof(Index));
         }
         return View(vm);
@@ -118,7 +117,7 @@ public class QuestionController : Controller
             return NotFound(); // Prevent deletion of questions that already have answers
         }
 
-        _questionService.DeleteQuestionAsync(id);
+        await _questionService.DeleteQuestionAsync(id);
         return RedirectToAction("Index");
     }
     #endregion

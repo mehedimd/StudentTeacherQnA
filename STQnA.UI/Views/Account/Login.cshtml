@@ -9,7 +9,7 @@
     <div class="col-md-6 offset-md-3">
         <form asp-action="Login" method="post" id="loginForm">
             <fieldset class="border p-3">
-                <legend class="w-auto px-2">Login Form</legend>
+                <legend class="text-center">Login Form</legend>
 
                 <div class="mb-3">
                     <label asp-for="Email" class="form-label"></label>
@@ -28,7 +28,10 @@
                     <label asp-for="RememberMe" class="form-check-label">Remember Me</label>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Login</button>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="@Url.Action("Register", "Account")" class="btn btn-outline-secondary">New here? Register Now</a>
+                </div>
             </fieldset>
         </form>
     </div>

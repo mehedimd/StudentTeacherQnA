@@ -14,12 +14,14 @@ namespace STQnA.Service.Services
     public class AnswerService : IAnswerService
     {
         public IAnswerRepository _repo;
+        public IQuestionRepository _iQuestionRepo;
         public IUserService _userService;
         public IMapper _iMapper;
-        public AnswerService(IAnswerRepository repo, IUserService userService)
+        public AnswerService(IAnswerRepository repo, IUserService userService, IQuestionRepository iQuestionRepo)
         {
             _repo = repo;
             _userService = userService;
+            _iQuestionRepo = iQuestionRepo;
         }
 
         public async Task<bool> AddAnswerAsync(AnswerVM vm)
@@ -28,7 +30,10 @@ namespace STQnA.Service.Services
             {
                 Answer model = new Answer()
                 {
-
+                    AnswerText = vm.AnswerText,
+                    TeacherId = _userService.GetCurrentUserId,
+                    QuestionId = vm.QuestionId,
+                    CreatedDate = vm.CreatedDate
                 };
 
                 await _repo.Add(model);
@@ -36,7 +41,15 @@ namespace STQnA.Service.Services
                 var result = _repo.Save();
 
                 if (result > 0)
-                    return true;
+                {
+                    var res = _iQuestionRepo.UpdateIsAnswered(vm.QuestionId);
+                    if (res > 0)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
                 else
                     return false;
             }

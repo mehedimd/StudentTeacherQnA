@@ -16,6 +16,6 @@ namespace STQnA.Core.ViewModels
         public int QuestionId { get; set; }
 
         // Foreign Key to the Teacher who answered (ApplicationUser)
-        public string TeacherId { get; set; } // This will hold IdentityUser Id (string)
+        public string? TeacherId { get; set; } // This will hold IdentityUser Id (string)
     }
 }

@@ -49,6 +49,7 @@ namespace STQnA.UI.Controllers
 
         // POST: Save new answer
         [HttpPost]
+        [ActionName("PostAnswer")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")] // Only Teacher can answer question
         public async Task<IActionResult> Create(AnswerVM vm)
@@ -57,7 +58,7 @@ namespace STQnA.UI.Controllers
             {
                 // Save the answer to the database
                 await _answerService.AddAnswerAsync(vm);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Question", new {id=vm.QuestionId});
             }
             return View(vm);
         }

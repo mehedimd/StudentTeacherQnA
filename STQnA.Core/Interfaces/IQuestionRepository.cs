@@ -12,5 +12,6 @@ namespace STQnA.Core.Interfaces
     {
         Task<IEnumerable<Question>> GetAllQuestion();
         Task<Question> GetQuestionByIdWithAnswer(int id);
+        int UpdateIsAnswered(int questionId);
     }
 }

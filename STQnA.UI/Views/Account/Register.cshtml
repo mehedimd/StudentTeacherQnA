@@ -57,8 +57,11 @@
                         <span asp-validation-for="InstituteIDCardNumber" class="text-danger"></span>
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Register</button>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <a href="@Url.Action("Login", "Account")" class="btn btn-outline-secondary">Already Registered? Login Now</a>
+                </div>
+                
             </fieldset>
         </form>
     </div>

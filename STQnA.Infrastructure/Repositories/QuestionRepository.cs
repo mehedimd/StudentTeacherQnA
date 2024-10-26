@@ -14,12 +14,26 @@ namespace STQnA.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Question>> GetAllQuestion()
         {
-            return await db.Set<Question>().Include(s=>s.Student).ToListAsync();
+            return await db.Set<Question>().Include(s=>s.Student).OrderByDescending(q=>q.CreatedDate).ToListAsync();
         }
 
         public async Task<Question> GetQuestionByIdWithAnswer(int id)
         {
-            return await db.Set<Question>().Include(s=>s.Student).Include(a => a.Answers).ThenInclude(t=>t.Teacher).FirstOrDefaultAsync();
+            var res =  await db.Set<Question>().Where(q=>q.QuestionId == id).Include(s=>s.Student).Include(a => a.Answers).ThenInclude(t=>t.Teacher).FirstOrDefaultAsync();
+            if(res != null)
+            {
+                return res;
+            }
+            return new Question();
+        }
+        public int UpdateIsAnswered(int questionId)
+        {
+           return db.Questions
+                .Where(q=>q.QuestionId == questionId)
+                .ExecuteUpdate(q=>q.SetProperty(
+                    a=>a.IsAnswered,
+                    a=> true
+                ));
         }
     }
 }

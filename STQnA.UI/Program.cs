@@ -14,6 +14,7 @@ builder.Services.AddDIServices(builder.Configuration);
 
 // register service
 builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddScoped<IAnswerService, AnswerService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 // Configure Identity
@@ -64,6 +65,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Question}/{action=Index}/{id?}");
 
 app.Run();
