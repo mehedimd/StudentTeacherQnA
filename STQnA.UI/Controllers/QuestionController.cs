@@ -11,10 +11,12 @@ public class QuestionController : Controller
 {
     #region Config
     private readonly IQuestionService _questionService; // Assuming a service layer for handling logic
+    private readonly IMapper _iMapper;
 
-    public QuestionController(IQuestionService questionService)
+    public QuestionController(IQuestionService questionService, IMapper iMapper)
     {
         _questionService = questionService;
+        _iMapper = iMapper;
     }
     #endregion
 
@@ -74,13 +76,7 @@ public class QuestionController : Controller
         {
             return NotFound(); // Prevent editing questions that already have answers
         }
-        QuestionVM model = new QuestionVM()
-        {
-            QuestionId = question.QuestionId,
-            StudentId = question.StudentId,
-            QuestionText = question.QuestionText,
-            CreatedDate = question.CreatedDate
-        };
+        var model = _iMapper.Map<QuestionVM>(question);
 
         return View(model);
     }

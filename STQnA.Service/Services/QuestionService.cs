@@ -10,21 +10,19 @@ namespace STQnA.Service.Services
         public IQuestionRepository _repo;
         public IUserService _userService;
         public IMapper _iMapper;
-        public QuestionService(IQuestionRepository repo, IUserService userService)
+        public QuestionService(IQuestionRepository repo, IUserService userService, IMapper mapper)
         {
             _repo = repo;
             _userService = userService;
+            _iMapper = mapper;
         }
 
         public async Task<bool> AddQuestionAsync(QuestionVM vm)
         {
             if (vm != null)
             {
-                Question model = new Question()
-                {
-                    QuestionText = vm.QuestionText,
-                    StudentId = _userService.GetCurrentUserId
-                };
+                var model = _iMapper.Map<Question>(vm);
+                model.StudentId = _userService.GetCurrentUserId;
 
                 await _repo.Add(model);
 
@@ -97,7 +95,7 @@ namespace STQnA.Service.Services
                 {
                     questionFind.QuestionId = vm.QuestionId;
                     questionFind.QuestionText = vm.QuestionText;
-                    questionFind.StudentId = vm.StudentId??"";
+                    questionFind.StudentId = vm.StudentId ?? "";
                     questionFind.CreatedDate = vm.CreatedDate;
 
                     _repo.Update(questionFind);
