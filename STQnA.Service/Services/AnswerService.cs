@@ -3,11 +3,6 @@ using STQnA.Core.Interfaces;
 using STQnA.Core.Models;
 using STQnA.Core.ViewModels;
 using STQnA.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace STQnA.Service.Services
 {
@@ -17,11 +12,12 @@ namespace STQnA.Service.Services
         public IQuestionRepository _iQuestionRepo;
         public IUserService _userService;
         public IMapper _iMapper;
-        public AnswerService(IAnswerRepository repo, IUserService userService, IQuestionRepository iQuestionRepo)
+        public AnswerService(IAnswerRepository repo, IUserService userService, IQuestionRepository iQuestionRepo, IMapper mapper)
         {
             _repo = repo;
             _userService = userService;
             _iQuestionRepo = iQuestionRepo;
+            _iMapper = mapper;
         }
 
         public async Task<bool> AddAnswerAsync(AnswerVM vm)

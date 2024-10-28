@@ -13,7 +13,12 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
 
     public async Task<T> GetById(int id)
     {
-        return await _dbContext.Set<T>().FindAsync(id);
+        var res = await _dbContext.Set<T>().FindAsync(id);
+        if (res != null)
+        {
+            return res;
+        }
+        return Activator.CreateInstance<T>();
     }
     public async Task<IEnumerable<T>> GetAll()
     {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using STQnA.Core.Models;
 using STQnA.Core.ViewModels;
+using STQnA.Infrastructure.Common;
 using STQnA.Service.Interfaces;
 
 namespace STQnA.UI.Controllers
@@ -51,7 +52,7 @@ namespace STQnA.UI.Controllers
         [HttpPost]
         [ActionName("PostAnswer")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Teacher")] // Only Teacher can answer question
+        [TeacherOrStudentAuthorization("id")] // Use the custom attribute // Only Teacher and who ask the question can answer question
         public async Task<IActionResult> Create(AnswerVM vm)
         {
             if (ModelState.IsValid)

@@ -23,7 +23,7 @@ namespace STQnA.Infrastructure
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server= .; Database = STQnADB; User Id = sa; Password=123; TrustServerCertificate = true; Trusted_Connection = true;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer("Server= 192.168.42.72; Database = STQnADB; User Id = sa; Password=68662; TrustServerCertificate = true; Trusted_Connection = true;MultipleActiveResultSets=True;");
             }
         }
 
