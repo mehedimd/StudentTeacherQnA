@@ -9,6 +9,11 @@ using STQnA.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// config for Railway.App deployment
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080"; // Use 8080 as default if PORT is not set
+builder.WebHost.ConfigureKestrel(options => options.ListenAnyIP(int.Parse(port)));
+// end config for Railway.App deployment
+
 // Configure DbContext and register repository by Extension method AddDIService
 builder.Services.AddDIServices(builder.Configuration);
 
