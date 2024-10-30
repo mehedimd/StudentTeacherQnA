@@ -24,7 +24,7 @@ namespace STQnA.Infrastructure.Repositories
             {
                 return res;
             }
-            return new Question();
+            return Activator.CreateInstance<Question>();
         }
         public int UpdateIsAnswered(int questionId)
         {

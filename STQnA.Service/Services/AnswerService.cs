@@ -24,13 +24,8 @@ namespace STQnA.Service.Services
         {
             if (vm != null)
             {
-                Answer model = new Answer()
-                {
-                    AnswerText = vm.AnswerText,
-                    TeacherId = _userService.GetCurrentUserId,
-                    QuestionId = vm.QuestionId,
-                    CreatedDate = vm.CreatedDate
-                };
+                var model = _iMapper.Map<Answer>(vm);
+                model.TeacherId = _userService.GetCurrentUserId;
 
                 await _repo.Add(model);
 
