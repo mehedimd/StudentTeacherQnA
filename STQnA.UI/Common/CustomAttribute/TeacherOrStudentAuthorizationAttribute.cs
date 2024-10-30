@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.DependencyInjection;
 using STQnA.Core.Interfaces;
 using System.Security.Claims;
 
-namespace STQnA.Infrastructure.Common
+namespace STQnA.UI.Common.CustomAttribute
 {
     public class TeacherOrStudentAuthorizationAttribute : AuthorizeAttribute, IAsyncAuthorizationFilter
     {

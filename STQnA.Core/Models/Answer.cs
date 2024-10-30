@@ -9,14 +9,14 @@ namespace STQnA.Core.Models
     public class Answer
     {
         public int AnswerId { get; set; }
-        public string AnswerText { get; set; }
+        public string AnswerText { get; set; } = string.Empty;
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         // Foreign Key to the Question this Answer belongs to
         public int QuestionId { get; set; }
 
         // Foreign Key to the Teacher who answered (ApplicationUser)
-        public string TeacherId { get; set; } // This will hold IdentityUser Id (string)
+        public string TeacherId { get; set; } = string.Empty; // This will hold IdentityUser Id (string)
 
         // Navigation Properties
         public Question Question { get; set; }

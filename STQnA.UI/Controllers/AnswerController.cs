@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using STQnA.Core.Models;
 using STQnA.Core.ViewModels;
-using STQnA.Infrastructure.Common;
+using STQnA.UI.Common.CustomAttribute;
 using STQnA.Service.Interfaces;
 
 namespace STQnA.UI.Controllers

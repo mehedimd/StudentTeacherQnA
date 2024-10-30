@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\STQnA.Core\STQnA.Core.csproj" />
     <ProjectReference Include="..\STQnA.Infrastructure\STQnA.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Map\" />
   </ItemGroup>
 
 </Project>
