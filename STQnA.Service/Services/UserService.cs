@@ -5,12 +5,15 @@ using System.Security.Claims;
 namespace STQnA.Service.Services;
 public class UserService : IUserService
 {
+    #region Config
     private readonly IHttpContextAccessor _httpContextAccessor;
     public UserService(IHttpContextAccessor httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
     }
+    #endregion
 
+    #region GetCurrentUserId
     public string GetCurrentUserId
     {
         get
@@ -19,4 +22,5 @@ public class UserService : IUserService
             return userId ?? string.Empty; // Return empty string if userId is null
         }
     }
+    #endregion
 }

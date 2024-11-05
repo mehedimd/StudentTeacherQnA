@@ -8,6 +8,7 @@ namespace STQnA.Service.Services
 {
     public class AnswerService : IAnswerService
     {
+        #region Config
         public IAnswerRepository _repo;
         public IQuestionRepository _iQuestionRepo;
         public IUserService _userService;
@@ -19,7 +20,9 @@ namespace STQnA.Service.Services
             _iQuestionRepo = iQuestionRepo;
             _iMapper = mapper;
         }
+        #endregion
 
+        #region Add
         public async Task<bool> AddAnswerAsync(AnswerVM vm)
         {
             if (vm != null)
@@ -46,7 +49,9 @@ namespace STQnA.Service.Services
             }
             return false;
         }
+        #endregion
 
+        #region Delete
         public async Task<bool> DeleteAnswerAsync(int id)
         {
             if (id > 0)
@@ -65,7 +70,9 @@ namespace STQnA.Service.Services
             }
             return false;
         }
+        #endregion
 
+        #region Get
         public async Task<IEnumerable<Answer>> GetAllAnswersAsync()
         {
             var listOfModel = await _repo.GetAll();
@@ -84,7 +91,9 @@ namespace STQnA.Service.Services
             }
             return new Answer { };
         }
+        #endregion
 
+        #region Update
         public async Task<bool> UpdateAnswerAsync(Answer model)
         {
             if (model != null)
@@ -109,5 +118,6 @@ namespace STQnA.Service.Services
             }
             return false;
         }
+        #endregion
     }
 }
